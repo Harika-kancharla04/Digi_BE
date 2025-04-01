@@ -8,7 +8,7 @@ const userRoutes = require("./routes/userRoutes");
 dotenv.config();
 app.use(cors());
 app.use(express.json());
-
+app.use(cors({ origin: "https://digitalyou.netlify.app", credentials: true }));
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("MongoDB connected successfully"))
@@ -16,13 +16,13 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 
 
 
-    
+
 app.get("/", (req, res) => {
     res.send("Backend running successfully");
 });
 
 
-app.use('/api', userRoutes);
+app.use('/api/users', userRoutes);
 
 const port = 3000;
 app.listen(port, () => {
