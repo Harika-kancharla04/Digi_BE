@@ -6,11 +6,14 @@ const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
 
 dotenv.config();
-app.use(cors());
+var corsOptions = {
+    origin: ['https://digitalyou.netlify.app','http://localhost:5173'],
+   
+  }
+app.use(cors(corsOptions));
 app.use(express.json());
-app.use(cors({ origin: "https://digitalyou.netlify.app", credentials: true }));
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB connected successfully"))
     .catch((err) => console.log(err));
 
